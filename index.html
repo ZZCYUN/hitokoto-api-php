@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Hitokoto API 调用文档</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 5px;
+    }
+    h1, h2, h3 {
+      color: #444;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      font-size: 90%;
+      border-radius: 3px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #666;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #999;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hitokoto API 调用文档</h1>
+    <p>本 API 用于获取各种类型的句子数据，通过传入不同参数，可控制返回结果。以下是各参数的详细说明：</p>
+
+    <h2>基本 URL</h2>
+    <p>
+      调用地址示例：<br>
+      <code>https://api.sb6.me/hitokoto/api.php</code>
+    </p>
+
+    <h2>请求参数</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>参数</th>
+          <th>描述</th>
+          <th>示例</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>c</code></td>
+          <td>
+            句子类型。有效值及其对应类型：
+            <ul>
+              <li><strong>a</strong> - 动画</li>
+              <li><strong>b</strong> - 漫画</li>
+              <li><strong>c</strong> - 游戏</li>
+              <li><strong>d</strong> - 文学</li>
+              <li><strong>e</strong> - 原创</li>
+              <li><strong>f</strong> - 来自网络</li>
+              <li><strong>g</strong> - 其他</li>
+              <li><strong>h</strong> - 影视</li>
+              <li><strong>i</strong> - 诗词</li>
+              <li><strong>j</strong> - 网易云</li>
+              <li><strong>k</strong> - 哲学</li>
+              <li><strong>l</strong> - 抖机灵</li>
+            </ul>
+            如果未指定，获取全部数据
+          </td>
+          <td><code>c=a</code></td>
+        </tr>
+        <tr>
+          <td><code>type</code></td>
+          <td>
+            返回格式类型：
+            <ul>
+              <li><strong>all</strong>：返回所有符合过滤条件的记录（JSON 数组）；</li>
+              <li><strong>json</strong>：返回随机一条完整的 JSON 对象；</li>
+              <li>其它或未指定：返回随机一条一言（纯文本）。</li>
+            </ul>
+          </td>
+          <td><code>type=json</code></td>
+        </tr>
+        <tr>
+          <td><code>max_length</code></td>
+          <td>过滤条件：仅返回 <code>length</code> 字段值小于等于该值的句子。</td>
+          <td><code>max_length=50</code></td>
+        </tr>
+        <tr>
+          <td><code>min_length</code></td>
+          <td>过滤条件：仅返回 <code>length</code> 字段值大于等于该值的句子。</td>
+          <td><code>min_length=10</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>调用示例</h2>
+    <p>获取动画类句子的示例：</p>
+    <pre><code>https://api.sb6.me/hitokoto/api.php?c=a</code></pre>
+
+    <p>获取长度介于 10 和 50 之间（包括10和50），并以 JSON 格式返回随机一条记录的示例：</p>
+    <pre><code>https://api.sb6.me/hitokoto/api.php?min_length=10&amp;max_length=50&amp;type=json</code></pre>
+
+    <p>获取全部符合条件的句子（从所有类型中合并）示例：</p>
+    <pre><code>https://api.sb6.me/hitokoto/api.php?type=all&amp;min_length=10&amp;max_length=50</code></pre>
+
+    <h2>数据来源</h2>
+    <p>本API数据来源于hitokoto句子包</p>
+    <pre><code>https://cdn.jsdelivr.net/gh/hitokoto-osc/sentences-bundle@1.0.399/</code></pre>
+    <p>句子包版本：<code>@1.0.399</code></p>
+
+    <div class="footer">
+      &copy; 2025 JunZi.
+    </div>
+  </div>
+</body>
+</html>
